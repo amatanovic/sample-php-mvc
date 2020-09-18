@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Post;
 
-class HomeController
+class HomeController extends AbstractController
 {
     public function indexAction()
     {
-        return 'Action radi';
+        return $this->view->render('home', [
+            'posts' => Post::getAll()
+        ]);
     }
 }
