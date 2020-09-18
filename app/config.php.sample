@@ -2,10 +2,9 @@
 
 return [
     'db' => [
-        'host' => '',
-        'name' => '',
+        'host' => 'db',
+        'name' => 'social_network',
         'user' => '',
-        'password' => '',
-    ],
-    'url' => ''
+        'password' => ''
+    ]
 ];

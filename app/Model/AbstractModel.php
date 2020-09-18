@@ -39,10 +39,18 @@ abstract class AbstractModel extends DataObject
         return static::createObject($firstRow);
     }
 
-    public static function getMultiple(string $column, $value): array
+    public static function getMultiple(string $column, $value, string $orderBy = null, array $limit = []): array
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName} WHERE {$column} = :value";
+
+        if ($orderBy) {
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT {$limit[0]}, {$limit[1]}";
+        }
 
         $statement = Database::getInstance()->prepare($sql);
         $statement->bindValue('value', $value);
@@ -56,10 +64,18 @@ abstract class AbstractModel extends DataObject
         return $models;
     }
 
-    public static function getAll(): array
+    public static function getAll(string $orderBy = null, array $limit = []): array
     {
         $tableName = static::getTableName();
         $sql = "SELECT * FROM {$tableName}";
+
+        if ($orderBy) {
+            $sql .= " ORDER BY {$orderBy}";
+        }
+
+        if ($limit) {
+            $sql .= " LIMIT {$limit[0]}, {$limit[1]}";
+        }
 
         $statement = Database::getInstance()->prepare($sql);
         $statement->execute();
