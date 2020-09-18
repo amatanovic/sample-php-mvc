@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'db' => [
+        'host' => 'db',
+        'name' => 'social_network',
+        'user' => '',
+        'password' => ''
+    ]
+];

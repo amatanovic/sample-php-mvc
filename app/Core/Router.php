@@ -1,25 +1,21 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Core;
-
 
 class Router implements RouterInterface
 {
     public function match(string $pathInfo)
     {
         $pathInfo = trim($pathInfo, '/');
-        $parts = $pathInfo ?
-            explode('/', $pathInfo)
-        : [];
+        $parts = $pathInfo ? explode('/', $pathInfo) : [];
 
         if (count($parts) > 2) {
             throw new \Exception('Not valid URL');
         }
 
-        $controller = ucfirst(
-            strtolower($parts[0] ?? 'home')
-        ) . 'Controller';
+        $controller = ucfirst(strtolower($parts[0] ?? 'home')) . 'Controller';
         $method = strtolower($parts[1] ?? 'index') . 'Action';
 
         $className = "\\App\\Controller\\{$controller}";
