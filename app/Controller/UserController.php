@@ -33,7 +33,7 @@ class UserController extends AbstractController
         }
 
         $requiredKeys = ['first_name', 'last_name', 'email', 'password', 'confirm_password'];
-        if (!$this->validateRegisterData($_POST, $requiredKeys)) {
+        if (!$this->validateData($_POST, $requiredKeys)) {
             // set error message
             header('Location: /user/register');
             return;
