@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core;
 
+use App\Core\Exception\RouterException;
+
 class Router implements RouterInterface
 {
     public function match(string $pathInfo)
@@ -12,7 +14,7 @@ class Router implements RouterInterface
         $parts = $pathInfo ? explode('/', $pathInfo) : [];
 
         if (count($parts) > 2) {
-            throw new \Exception('Not valid URL');
+            throw new RouterException('Not valid URL');
         }
 
         $controller = ucfirst(strtolower($parts[0] ?? 'home')) . 'Controller';
@@ -21,7 +23,7 @@ class Router implements RouterInterface
         $className = "\\App\\Controller\\{$controller}";
 
         if (!method_exists($className, $method)) {
-            throw new \Exception('Method does not exist');
+            throw new RouterException('Method does not exist');
         }
 
         $object = new $className();

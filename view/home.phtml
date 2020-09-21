@@ -15,7 +15,7 @@
 <?php foreach ($posts as $post): ?>
     <div class="row">
         <div class="col">
-            <div class="card" style="width: 18rem;">
+            <div class="card">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted"><?= $post->getUserName() ?> (<?= $post->getDate() ?>)</h6>
                     <p class="card-text"><?= htmlspecialchars($post->getContent()) ?></p>
@@ -23,9 +23,12 @@
                         <a href="/post/delete?id=<?= $post->getId() ?>" class="card-link">Delete</a>
                     <?php endif; ?>
                 </div>
+                <?php include 'post/comment.phtml'?>
             </div>
         </div>
     </div>
+
+    <hr>
 <?php endforeach; ?>
 
 <?php include 'layout/footer.phtml' ?>

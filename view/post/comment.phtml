@@ -1,0 +1,14 @@
+<ul class="list-group list-group-flush">
+    <div id="post-comments-<?= $post->getId() ?>">
+        <?php foreach ($post->getComments() as $comment): ?>
+            <li class="list-group-item"><?= htmlspecialchars($comment->getContent()) ?></li>
+        <?php endforeach; ?>
+    </div>
+
+    <?php if ($currentUser): ?>
+        <li class="list-group-item">
+            <textarea class="form-control" id="new-comment-<?= $post->getId() ?>" rows="1"></textarea>
+            <button class="post-comment btn btn-success" data-post_id="<?= $post->getId() ?>">Post Comment</button>
+        </li>
+    <?php endif; ?>
+</ul>

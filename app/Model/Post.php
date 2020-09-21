@@ -15,6 +15,13 @@ class Post extends AbstractModel
             $user = User::getOne('id', $userId);
             $data['user_name'] = "{$user->getFirstName()} {$user->getLastName()}";
         }
+
+        $data['comments'] = [];
+        if ($postId = $data['id'] ?? null) {
+            $comments = Comment::getMultiple('post_id', $postId);
+            $data['comments'] = $comments;
+        }
+
         return parent::createObject($data);
     }
 }

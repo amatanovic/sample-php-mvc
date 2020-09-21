@@ -104,8 +104,12 @@ abstract class AbstractModel extends DataObject
 
         $sql = "INSERT INTO {$tableName} ($columnsString) VALUES ($valuesString)";
 
-        $statement = Database::getInstance()->prepare($sql);
+        $db = Database::getInstance();
+
+        $statement = $db->prepare($sql);
         $statement->execute($data);
+
+        return $db->lastInsertId(static::getTableName());
     }
 
     public static function delete(string $column, $value)

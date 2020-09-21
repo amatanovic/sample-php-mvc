@@ -11,7 +11,7 @@ class HomeController extends AbstractController
     public function indexAction()
     {
         return $this->view->render('home', [
-            'posts' => Post::getAll()
+            'posts' => Post::getAll('date DESC', [0, 5])
         ]);
     }
 }
